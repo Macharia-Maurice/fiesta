@@ -1,3 +1,4 @@
+import CheckoutBtn from '@/components/shared/CheckoutBtn'
 import Collection from '@/components/shared/Collection'
 import { getEventById, getRelatedEventsByCategory } from '@/lib/actions/event.actions'
 import { formatDateTime } from '@/lib/utils'
@@ -58,6 +59,10 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
                         </div>
 
                         {/* BuyTicket btn */}
+                        <CheckoutBtn
+                            event={event}
+                        
+                        />
 
                         <div className='flex flex-col gap-5'>
 
