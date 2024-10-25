@@ -42,9 +42,9 @@ const ProfilePage = async () => {
                     emptyStateSubtext="Purchase tickets to events to see them here"
                     collectionType="My_Tickets"
                     limit={3}
-                    page={1}
+                    page={ordersPage}
                     urlParamName="ordersPage"
-                    totalPages={2}
+                    totalPages={orders?.totalPages}
                 />
             </section> */}
 
