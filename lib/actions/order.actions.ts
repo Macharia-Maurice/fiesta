@@ -1,17 +1,17 @@
-'use server'
+// 'use server'
 
-import { CheckoutOrderParams } from "@/types"
-import { handleError } from "../utils"
-import { connectToDatabase } from "../database"
+// import { CheckoutOrderParams } from "@/types"
+// import { handleError } from "../utils"
+// import { connectToDatabase } from "../database"
 
-export const checkoutOrder = async (order: CheckoutOrderParams) => {
+// export const checkoutOrder = async (order: CheckoutOrderParams) => {
 
-    const price = order.isFree ? '0' : Number(order.price);
+//     const price = order.isFree ? '0' : Number(order.price);
     
-    try {
+//     try {
         
          
-    } catch (error) {
-        handleError(error);
-    }
-}
+//     } catch (error) {
+//         handleError(error);
+//     }
+// }
