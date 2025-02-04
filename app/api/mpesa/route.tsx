@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 
 type ResultParameter = {
     Key: string;
@@ -27,27 +27,37 @@ type CallbackData = {
     };
 };
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method === 'POST') {
-        const callbackData: CallbackData = req.body;
+// In-memory storage for callback data
+const transactions: CallbackData[] = [];
+
+export async function POST(request: NextRequest) {
+    try {
+        const callbackData: CallbackData = await request.json();
         console.log('Callback Data:', callbackData);
+
+        // Store the callback data in memory
+        transactions.push(callbackData);
 
         // Process the callback data
         if (callbackData.Result.ResultCode === '0') {
-            // Transaction successful
             console.log('Transaction successful:', callbackData.Result);
-            // Extract and use relevant data
-            const transactionID = callbackData.Result.TransactionID;
-            const amount = callbackData.Result.ResultParameters.ResultParameter.find(param => param.Key === 'Amount')?.Value;
-            // Update your database or application state
         } else {
-            // Transaction failed
             console.log('Transaction failed:', callbackData.Result);
-            // Handle the failure case
         }
 
-        res.status(200).send('Callback received');
-    } else {
-        res.status(405).send('Method Not Allowed');
+        return NextResponse.json({ message: 'Callback received' }, { status: 200 });
+    } catch (error) {
+        console.error('Error processing callback:', error);
+        return NextResponse.json({ message: 'Error processing callback' }, { status: 500 });
+    }
+}
+
+// Endpoint to fetch all transactions
+export async function GET(request: NextRequest) {
+    try {
+        return NextResponse.json(transactions, { status: 200 });
+    } catch (error) {
+        console.error('Error fetching transactions:', error);
+        return NextResponse.json({ message: 'Error fetching transactions' }, { status: 500 });
     }
 }
