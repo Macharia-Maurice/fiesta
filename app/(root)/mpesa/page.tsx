@@ -21,7 +21,7 @@ type Transaction = {
 
 export default async function TransactionsPage() {
     // Fetch data from the API route
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/mpesa`, {
+    const response = await fetch(`/api/mpesa`, {
         cache: 'no-store', // Disable caching to always fetch fresh data
     });
 
