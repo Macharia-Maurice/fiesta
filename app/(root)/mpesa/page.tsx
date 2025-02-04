@@ -21,7 +21,7 @@ type Transaction = {
 
 export default async function TransactionsPage() {
     // Fetch data from the API route
-    const response = await fetch(`/api/mpesa`, {
+    const response = await fetch("https://fiesta-murex.vercel.app/api/mpesa", {
         cache: 'no-store', // Disable caching to always fetch fresh data
     });
 
